@@ -31,6 +31,5 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
-      - name: Build Docker for Dev (develop only)
-        if: github.ref == 'refs/heads/develop'
+      - name: Build Docker for Dev
         run: sh publish.sh
