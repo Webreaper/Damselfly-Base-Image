@@ -12,11 +12,12 @@
     <None Remove="Emgu.CV.runtime.windows" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Emgu.CV" Version="4.5.2.4673" />
-    <PackageReference Include="Emgu.CV.runtime.linux-arm" Version="4.5.2.4673" />
-    <PackageReference Include="Emgu.CV.runtime.ubuntu.20.04-x64" Version="4.5.2.4673" />
-    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.5.2.4673" />
-  </ItemGroup>
+    <PackageReference Include="Emgu.CV" Version="4.5.1.4349" />
+    <PackageReference Include="Emgu.CV.runtime.linux-arm" Version="4.5.1.4349" />
+    <PackageReference Include="Emgu.CV.runtime.ubuntu.20.04-x64" Version="4.5.1.4349" />
+    <PackageReference Include="Emgu.CV.runtime.windows" Version="4.5.1.4349" />
+    <PackageReference Include="Emgu.CV.runtime.macos" Version="4.5.1.4349" />
+</ItemGroup>
   <ItemGroup>
     <None Update="Oscars.jpeg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -25,6 +26,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <PropertyGroup>
+    <RestoreSources>$(RestoreSources);../packages;https://api.nuget.org/v3/index.json</RestoreSources>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <WarningLevel>4</WarningLevel>
     <WarningLevel>4</WarningLevel>

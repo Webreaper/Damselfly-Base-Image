@@ -23,7 +23,7 @@ namespace EmguCVSample
                 var faceDetector = new CascadeClassifier("haarcascade_frontalface_default.xml");
 
                 Console.WriteLine("Initialising grayscale image....");
-                Mat imgGray = null;
+                var imgGray = new UMat();
                 CvInvoke.CvtColor(img, imgGray, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
 
                 Console.WriteLine("Detecting faces....");
