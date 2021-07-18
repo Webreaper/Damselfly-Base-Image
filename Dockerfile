@@ -1,5 +1,6 @@
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
+# FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
+FROM emgu/bazel-android:dotnet-5.0-bazel-4.0
 
 WORKDIR /app
 COPY EmguCVSample/bin/Release/net5.0/linux-x64/publish .
