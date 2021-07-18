@@ -33,3 +33,6 @@ jobs:
           
       - name: Build Docker for Dev
         run: sh publish.sh
+
+      - name: Build Emgu Docker Sample
+        run: cd UbuntuSample/Ubuntu && sh ./build_docker
