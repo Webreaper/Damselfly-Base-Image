@@ -31,8 +31,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
+      - name: Build Emgu Docker Sample
+        run: cd UbuntuSample/Ubuntu && sh ./build_docker
+      
       - name: Build Docker for Dev
         run: sh publish.sh
 
-      - name: Build Emgu Docker Sample
-        run: cd UbuntuSample/Ubuntu && sh ./build_docker
