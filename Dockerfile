@@ -1,6 +1,15 @@
 # Use the bazel-android image
 # FROM emgu/bazel-android:dotnet-5.0-bazel-4.0
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
+
+#Add dotnet repo
+RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+
+RUN apt update
+RUN apt -y upgrade
+RUN apt -y install dotnet-sdk-5.0 aspnetcore-runtime-5.0
+RUN apt-get -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
 
 #Create a new folder for our project
 RUN mkdir -p /emgu
@@ -28,11 +37,6 @@ RUN dotnet restore
 
 #Compile the program
 RUN dotnet build
-
-RUN apt-get update
-RUN apt-get install -y libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
-RUN apt-get install -y build-essential libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
-RUN apt-get install -y cups libc6-dev libgdiplus libicu-dev libharfbuzz0b libfontconfig1 libfreetype6 libpango-1.0-0 libpangocairo-1.0
 
 #run the program
 ENTRYPOINT ["dotnet", "run"]
