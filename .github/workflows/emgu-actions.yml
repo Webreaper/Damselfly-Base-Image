@@ -2,13 +2,7 @@ name: emgu-actions
 on: [push]
 jobs:
   build-docker:
-    runs-on: ${{ matrix.os }}
-    strategy: 
-      matrix: 
-        target: [linux]
-        include: 
-          - target: linux
-            os: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Source
