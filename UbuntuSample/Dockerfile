@@ -14,10 +14,16 @@ WORKDIR "/emgu"
 RUN dotnet new console
 
 #Add Emgu.CV.runtime package
-RUN dotnet add package Emgu.CV.runtime.ubuntu.20.04-x64 --version 4.5.1.4349
+#RUN dotnet add package Emgu.CV.runtime.ubuntu.20.04-x64 --version 4.5.1.4349
 
 #COPY the source code to the docker image
 COPY Program.cs "/emgu/Program.cs"
+COPY emgu.csproj "/emgu/emgu.csproj"
+COPY Oscars.jpeg "/emgu/Oscars.jpeg"
+COPY haarcascade_frontalface_default.xml "/emgu/haarcascade_frontalface_default.xml"
+
+#Restore nuget packages
+RUN dotnet restore
 
 #Compile the program
 RUN dotnet build
