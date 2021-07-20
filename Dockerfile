@@ -1,9 +1,6 @@
 # Use the bazel-android image
 # FROM emgu/bazel-android:dotnet-5.0-bazel-4.0
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
-
-RUN apt-get update
-RUN apt-get -y install dotnet-sdk-5.0 
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS final
 
 #Create a new folder for our project
 RUN mkdir -p /emgu
