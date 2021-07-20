@@ -2,6 +2,9 @@
 # FROM emgu/bazel-android:dotnet-5.0-bazel-4.0
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
 
+RUN apt-get update
+RUN apt-get -y install dotnet-sdk-5.0 
+
 #Create a new folder for our project
 RUN mkdir -p /emgu
 
