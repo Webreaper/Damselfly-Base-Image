@@ -2,6 +2,11 @@
 # FROM emgu/bazel-android:dotnet-5.0-bazel-4.0
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
 
+RUN apt update
+
+#Add basic packages required to install bazel and dotnet repo
+RUN apt -y install curl wget gnupg apt-transport-https
+
 #Add dotnet repo
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 RUN dpkg -i packages-microsoft-prod.deb
