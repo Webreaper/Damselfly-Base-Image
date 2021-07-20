@@ -1,6 +1,6 @@
 # Use the bazel-android image
 # FROM emgu/bazel-android:dotnet-5.0-bazel-4.0
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS final
+FROM ubuntu:20.04
 
 RUN apt update
 
@@ -20,6 +20,7 @@ RUN apt -y install lsb-release
 
 # Emgu CV dependencies
 RUN apt-get -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
+RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
 
 #Create a new folder for our project
 RUN mkdir -p /emgu
