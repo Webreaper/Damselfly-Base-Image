@@ -5,7 +5,7 @@ if [ -z "$1" ]; then
 else
     version=`cat VERSION`
     DOCKERTAG="${version}-beta"
-    echo "Master specified - creating tag: ${DOCKERTAG}"
+    echo "Main specified - creating tag: ${DOCKERTAG}"
 fi
 
 echo "**** Building Docker Damselfly Base Image"

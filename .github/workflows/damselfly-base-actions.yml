@@ -34,6 +34,6 @@ jobs:
         if: github.ref == 'refs/heads/develop'
         run: sh makedocker.sh
 
-      - name: Build Docker for Release (master only)
-        if: github.ref == 'refs/heads/master'
-        run: sh makedocker.sh master
+      - name: Build Docker for Release (main only)
+        if: github.ref == 'refs/heads/main'
+        run: sh makedocker.sh main
