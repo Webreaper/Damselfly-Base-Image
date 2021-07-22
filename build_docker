@@ -1,5 +1,0 @@
-#!/usr/bin/bash -v
-
-docker build -t webreaper/emgu_ubuntu_demo .
-docker push webreaper/emgu_ubuntu_demo
-

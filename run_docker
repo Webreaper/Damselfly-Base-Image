@@ -1,4 +1,0 @@
-#!/usr/bin/bash -v
-
-docker run webreaper/emgu_ubuntu_demo
-
