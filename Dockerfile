@@ -17,7 +17,7 @@ RUN sed -i'.bak' 's/$/ contrib/' /etc/apt/sources.list
 RUN apt-get update && apt-get install -y ttf-mscorefonts-installer fontconfig
 
 # Add ExifTool
-RUN sudo apt install -y exiftool 
+RUN apt install -y exiftool 
 
 RUN apt install -y libgomp1 apt-utils libgdiplus libc6-dev 
 
