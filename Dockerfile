@@ -9,9 +9,11 @@ ADD VERSION .
 RUN apt update
 RUN apt install -y procps
 
+RUN apt install -y  fonts-liberation
+
 # Add Microsoft fonts that'll be used for watermarking
-RUN sed -i'.bak' 's/$/ contrib/' /etc/apt/sources.list
-RUN apt update && apt install -y ttf-mscorefonts-installer fontconfig
+#RUN sed -i'.bak' 's/$/ contrib/' /etc/apt/sources.list
+#RUN apt update && apt install -y ttf-mscorefonts-installer fontconfig
 
 # Need sudo for the iNotify count increase
 # RUN set -ex && apt-get install -y sudo
