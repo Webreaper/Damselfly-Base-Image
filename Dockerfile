@@ -21,7 +21,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         # GDI+ and ONNX 
                         libgomp1 apt-utils libgdiplus libc6-dev \
                         # Now the emgucv stuff 
-                        build-essentials \
                         libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev \
                         libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev 
 
