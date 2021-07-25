@@ -1,5 +1,5 @@
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS final
+FROM ubuntu:20.04 as final
 
 # Copy the entrypoint script
 COPY ./entrypoint.sh /
