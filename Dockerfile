@@ -11,7 +11,7 @@ ADD VERSION .
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         # proxps 
-                        proxps \
+                        procps \
                         # exiftool
                         exiftool \
                         # GDI+ and ONNX 
