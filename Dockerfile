@@ -7,7 +7,10 @@ RUN ["chmod", "+x", "/entrypoint.sh"]
 ADD VERSION .
 
 # Add Microsoft fonts that'll be used for watermarking
-RUN apt install -y ttf-mscorefonts-installer fontconfig
+RUN echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
+RUN apt-get install -y --no-install-recommends fontconfig ttf-mscorefonts-installer
+ADD localfonts.conf /etc/fonts/local.conf
+RUN fc-cache -f -v
 
 RUN apt update
 RUN apt install -y procps
