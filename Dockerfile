@@ -9,7 +9,8 @@ ADD VERSION .
 RUN apt update
 RUN apt install -y procps
 
-RUN apt install -y  fonts-liberation
+RUN apt install -y fontconfig fonts-liberation
+RUN fc-cache -f -v
 
 # Add Microsoft fonts that'll be used for watermarking
 #RUN sed -i'.bak' 's/$/ contrib/' /etc/apt/sources.list
