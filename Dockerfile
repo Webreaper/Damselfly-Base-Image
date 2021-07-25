@@ -23,6 +23,8 @@ RUN apt install -y lsb-release
 RUN apt install -y libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
 RUN apt install -y build-essential libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
 
+RUN apt update && apt install -y fontconfig fonts-liberation
+
 # Add Microsoft fonts that'll be used for watermarking
 RUN sed -i'.bak' 's/$/ contrib/' /etc/apt/sources.list
 RUN apt update && apt install -y ttf-mscorefonts-installer fontconfig
