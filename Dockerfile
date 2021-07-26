@@ -15,8 +15,8 @@ RUN apt -y upgrade
 RUN apt -y install dotnet-sdk-5.0 aspnetcore-runtime-5.0
 
 # Emgu CV dependencies
-RUN apt -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
-RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
+#RUN apt -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
+#RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
 
 #Create a new folder for our project
 RUN mkdir -p /emgu
@@ -39,6 +39,25 @@ RUN dotnet restore
 #Compile the program
 RUN dotnet build
 
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
+                        lsb-release \
+                        curl wget gnupg apt-transport-https \
+                        # proxps 
+                        procps \
+                        # exiftool
+                        exiftool \
+                        # and lastly, fonts
+                        fontconfig fonts-liberation \
+                        # GDI+ and ONNX 
+                        libgomp1 apt-utils libgdiplus libc6-dev \
+                        # Now the emgucv stuff 
+                        libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev \
+                        libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev 
+
+# init the font caches
+RUN fc-cache -f -v
+
 #run the program
 ENTRYPOINT ["dotnet", "run"]
 
@@ -49,24 +68,5 @@ ENTRYPOINT ["dotnet", "run"]
 
 # # Need sudo for the iNotify count increase
 # # RUN set -ex && apt-get install -y sudo
-
-# RUN apt-get update
-# RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
-#                         lsb-release \
-#                         curl wget gnupg apt-transport-https \
-#                         # proxps 
-#                         procps \
-#                         # exiftool
-#                         exiftool \
-#                         # and lastly, fonts
-#                         fontconfig fonts-liberation \
-#                         # GDI+ and ONNX 
-#                         libgomp1 apt-utils libgdiplus libc6-dev \
-#                         # Now the emgucv stuff 
-#                         libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev \
-#                         libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev 
-
-# # init the font caches
-# RUN fc-cache -f -v
 
 # ENTRYPOINT ["sh","/entrypoint.sh"]
