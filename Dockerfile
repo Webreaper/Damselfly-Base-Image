@@ -36,8 +36,8 @@ COPY haarcascade_frontalface_default.xml "/emgu/haarcascade_frontalface_default.
 #Restore nuget packages
 RUN dotnet restore
 
-#Compile the program
-RUN dotnet build
+RUN dotnet publish emgu -r linux-x64 -f net5.0 -c Release --self-contained true /p:Version=$version /p:PublishSingleFile=true /p:PublishTrimmed=true /p:IncludeNativeLibrariesForSelfExtract=true
+RUN ls emgu/bin/Release/net5.0/linux-x64/publish
 
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
@@ -59,7 +59,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
 RUN fc-cache -f -v
 
 #run the program
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["sh", "emgu/bin/Release/net5.0/linux-x64/publish"]
 
 # Copy the entrypoint script
 # COPY ./entrypoint.sh /
