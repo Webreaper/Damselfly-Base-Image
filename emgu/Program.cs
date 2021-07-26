@@ -16,25 +16,30 @@ namespace EmguCVSample
 
             try
             {
-                string path = "./Oscars.jpeg";
-                var img = CvInvoke.Imread(path);
+                var images = System.IO.Directory.GetFiles("./pics");
 
-                Console.WriteLine("Initialising face detector....");
-                var faceDetector = new CascadeClassifier("haarcascade_frontalface_default.xml");
-
-                Console.WriteLine("Initialising grayscale image....");
-                var imgGray = new UMat();
-                CvInvoke.CvtColor(img, imgGray, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
-
-                Console.WriteLine("Detecting faces....");
-                var faces = faceDetector.DetectMultiScale(imgGray, 1.1, 10, new Size(20, 20), Size.Empty);
-
-                Console.WriteLine($"Processing {faces.Length} faces...");
-
-                foreach (var face in faces)
+                foreach (var path in images)
                 {
-                    CvInvoke.Rectangle(img, face, new MCvScalar(255, 255, 255));
-                    Console.WriteLine($"Found face: {face.Left} {face.Top} {face.Width} {face.Height}");
+                    Console.WriteLine($"Looking for faces in {path}...");
+                    var img = CvInvoke.Imread(path);
+
+                    Console.WriteLine("Initialising face detector....");
+                    var faceDetector = new CascadeClassifier("haarcascade_frontalface_default.xml");
+
+                    Console.WriteLine("Initialising grayscale image....");
+                    var imgGray = new UMat();
+                    CvInvoke.CvtColor(img, imgGray, Emgu.CV.CvEnum.ColorConversion.Bgr2Gray);
+
+                    Console.WriteLine("Detecting faces....");
+                    var faces = faceDetector.DetectMultiScale(imgGray, 1.1, 10, new Size(20, 20), Size.Empty);
+
+                    Console.WriteLine($"Processing {faces.Length} faces...");
+
+                    foreach (var face in faces)
+                    {
+                        CvInvoke.Rectangle(img, face, new MCvScalar(255, 255, 255));
+                        Console.WriteLine($"Found face: {face.Left} {face.Top} {face.Width} {face.Height}");
+                    }
                 }
 
                 Console.WriteLine("Processing complete.");
