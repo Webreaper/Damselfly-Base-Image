@@ -18,17 +18,11 @@ RUN apt -y install dotnet-sdk-5.0 aspnetcore-runtime-5.0
 RUN apt -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
 RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
 
-#Create a new folder for our project
-RUN mkdir -p /emgu
-
-#Change work dir
-WORKDIR "/emgu"
-
 #Create a new console program
 RUN dotnet new console
 
 #COPY the source code to the docker image
-COPY Program.cs "/emgu/Program.cs"
+COPY emgu/Program.cs "/emgu/Program.cs"
 COPY emgu.csproj "/emgu/emgu.csproj"
 COPY Oscars.jpeg "/emgu/Oscars.jpeg"
 COPY haarcascade_frontalface_default.xml "/emgu/haarcascade_frontalface_default.xml"
