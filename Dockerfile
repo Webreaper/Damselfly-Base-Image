@@ -4,7 +4,6 @@ RUN apt update
 
 #Add basic packages required to install bazel and dotnet repo
 RUN apt -y install wget 
-# RUN apt -y install curl gnupg apt-transport-https
 
 #Add dotnet repo
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -13,10 +12,6 @@ RUN dpkg -i packages-microsoft-prod.deb
 RUN apt update
 RUN apt -y upgrade
 RUN apt -y install dotnet-sdk-5.0 aspnetcore-runtime-5.0
-
-# Emgu CV dependencies
-#RUN apt -y install libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev
-#RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
 
 #Create a new folder for our project
 RUN mkdir -p /emgu
