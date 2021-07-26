@@ -73,7 +73,7 @@ namespace EmguCVSample
                         }
                     }
 
-                    foreach (var face in rects.OrderBy( x => x ) )
+                    foreach (var face in rects )
                     {
                         Console.WriteLine($" Found face: {face.Key.Left}, {face.Key.Top}, {face.Key.Width}, {face.Key.Height} [{face.Value}]");
                     }
