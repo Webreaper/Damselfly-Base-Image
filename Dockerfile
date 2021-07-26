@@ -14,7 +14,7 @@ RUN apt -y upgrade
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         lsb-release \
-                        curl gnupg apt-transport-https \
+                        curl gnupg apt-transport-https unzip \
                         # proxps 
                         procps \
                         # exiftool
