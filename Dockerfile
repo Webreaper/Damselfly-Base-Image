@@ -53,15 +53,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
 # init the font caches
 RUN fc-cache -f -v
 
-#run the program
-ENTRYPOINT ["sh", "/emgu/bin/Release/net5.0/linux-x64/publish/emgu"]
-
 # Copy the entrypoint script
-# COPY ./entrypoint.sh /
-# RUN ["chmod", "+x", "/entrypoint.sh"]
+COPY ./entrypoint.sh /
+RUN ["chmod", "+x", "/entrypoint.sh"]
+
 # ADD VERSION .
 
 # # Need sudo for the iNotify count increase
 # # RUN set -ex && apt-get install -y sudo
 
-# ENTRYPOINT ["sh","/entrypoint.sh"]
+ENTRYPOINT ["sh","/entrypoint.sh"]
