@@ -39,12 +39,12 @@ namespace EmguCVSample
                     }
 
                     var haarcascades = Directory.GetFiles(".", "haarcascade*.xml");
-                    var classifiers = haarcascades.Select(x => {
+                    var classifiers = haarcascades.ToDictionary(xml => xml, x => {
                         Console.WriteLine($"Initialising face detector with {x}...");
                         return new CascadeClassifier(x);
-                    }).ToList();
+                    });
 
-                    List<Rectangle> rects = new List<Rectangle>();
+                    List<KeyValuePair<Rectangle, string>> rects = new List<KeyValuePair<Rectangle, string>>();
 
                     foreach (var path in images)
                     {
@@ -57,13 +57,13 @@ namespace EmguCVSample
                             CvInvoke.CvtColor(img, imgGray, ColorConversion.Bgr2Gray);
                             foreach (var detector in classifiers)
                             {
-                                Console.WriteLine($"Detecting with {detector}");
-                                var results = detector.DetectMultiScale(imgGray, 1.2, 10, new Size(20, 20), Size.Empty);
+                                Console.WriteLine($"Detecting with {detector.Key}");
+                                var results = detector.Value.DetectMultiScale(imgGray, 1.2, 10, new Size(20, 20), Size.Empty);
 
-                                foreach( var face in results )
-                                    Console.WriteLine($" Found faces: {face.Left}, {face.Top}, {face.Width}, {face.Height}");
-
-                                rects = rects.Union(results).ToList();
+                                foreach (var face in results)
+                                {
+                                    rects.Add(new KeyValuePair<Rectangle, string>(face, detector.Key) );
+                                }
                             }
 
                         }
@@ -73,9 +73,9 @@ namespace EmguCVSample
                         }
                     }
 
-                    foreach (var face in rects)
+                    foreach (var face in rects.OrderBy( x => x ) )
                     {
-                        Console.WriteLine($" Found face: {face.Left}, {face.Top}, {face.Width}, {face.Height}");
+                        Console.WriteLine($" Found face: {face.Key.Left}, {face.Key.Top}, {face.Key.Width}, {face.Key.Height} [{face.Value}]");
                     }
 
                     Console.WriteLine("Complete - all images processed.");
