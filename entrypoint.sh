@@ -7,3 +7,6 @@ set -e
 echo "Dotnet Run:"
 dotnet run
 
+echo "Publish Run"
+/emgu/bin/Release/net5.0/linux-x64/publish/emgu
+
