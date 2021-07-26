@@ -22,7 +22,7 @@ RUN apt -y install build-essential cmake git protobuf-compiler libprotobuf-dev
 RUN dotnet new console
 
 #COPY the source code to the docker image
-COPY emgu/Program.cs "/emgu/Program.cs"
+COPY Program.cs "/emgu/Program.cs"
 COPY emgu.csproj "/emgu/emgu.csproj"
 COPY Oscars.jpeg "/emgu/Oscars.jpeg"
 COPY haarcascade_frontalface_default.xml "/emgu/haarcascade_frontalface_default.xml"
