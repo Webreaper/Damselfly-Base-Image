@@ -7,8 +7,3 @@ set -e
 echo "Dotnet Run:"
 dotnet run
 
-echo "Run Compiled:"
-/emgu/bin/Release/net5.0/linux-x64/emgu
-
-echo "Run Published:"
-/emgu/bin/Release/net5.0/linux-x64/publish/emgu
