@@ -1,9 +1,7 @@
 ﻿using System;
 using Emgu.CV;
-using Emgu.CV.Structure;
-using Emgu.Util;
+using System.Linq;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using Emgu.CV.CvEnum;
 using System.IO;
 using System.Collections.Generic;
@@ -40,8 +38,13 @@ namespace EmguCVSample
                         return;
                     }
 
-                    Console.WriteLine("Initialising face detector....");
-                    var faceDetector = new CascadeClassifier("haarcascade_frontalface_default.xml");
+                    var haarcascades = Directory.GetFiles(".", "haarcascade*.xml");
+                    var classifiers = haarcascades.Select(x => {
+                        Console.WriteLine($"Initialising face detector with {x}...");
+                        return new CascadeClassifier(x);
+                    }).ToList();
+
+                    List<Rectangle> rects = new List<Rectangle>();
 
                     foreach (var path in images)
                     {
@@ -52,19 +55,27 @@ namespace EmguCVSample
                             var img = CvInvoke.Imread(path);
                             var imgGray = new UMat();
                             CvInvoke.CvtColor(img, imgGray, ColorConversion.Bgr2Gray);
-
-                            var faces = faceDetector.DetectMultiScale(imgGray, 1.2, 10, new Size(20, 20), Size.Empty);
-
-                            foreach (var face in faces)
+                            foreach (var detector in classifiers)
                             {
-                                Console.WriteLine($" Found face: {face.Left}, {face.Top}, {face.Width}, {face.Height}");
+                                Console.WriteLine($"Detecting with {detector}");
+                                var results = detector.DetectMultiScale(imgGray, 1.2, 10, new Size(20, 20), Size.Empty);
+
+                                foreach( var face in results )
+                                    Console.WriteLine($" Found faces: {face.Left}, {face.Top}, {face.Width}, {face.Height}");
+
+                                rects = rects.Union(results).ToList();
                             }
+
                         }
                         catch (Exception ex)
                         {
                             Console.WriteLine($"Exception while processing {path}: {ex}");
                         }
+                    }
 
+                    foreach (var face in rects)
+                    {
+                        Console.WriteLine($" Found face: {face.Left}, {face.Top}, {face.Width}, {face.Height}");
                     }
 
                     Console.WriteLine("Complete - all images processed.");
