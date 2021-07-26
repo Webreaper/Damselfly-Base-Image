@@ -10,6 +10,13 @@ namespace EmguCVSample
 {
     class Program
     {
+        private class FaceResult
+        {
+            public Rectangle Rect { get; set; }
+            public string Image { get; set; }
+            public string Cascade { get; set; }
+        }
+
         static void Main(string[] args)
         {
             try
@@ -44,7 +51,7 @@ namespace EmguCVSample
                         return new CascadeClassifier(x);
                     });
 
-                    List<KeyValuePair<Rectangle, string>> rects = new List<KeyValuePair<Rectangle, string>>();
+                    List<FaceResult> rects = new List<FaceResult>();
 
                     foreach (var path in images)
                     {
@@ -57,12 +64,15 @@ namespace EmguCVSample
                             CvInvoke.CvtColor(img, imgGray, ColorConversion.Bgr2Gray);
                             foreach (var detector in classifiers)
                             {
-                                Console.WriteLine($"Detecting with {detector.Key}");
                                 var results = detector.Value.DetectMultiScale(imgGray, 1.2, 10, new Size(20, 20), Size.Empty);
 
                                 foreach (var face in results)
                                 {
-                                    rects.Add(new KeyValuePair<Rectangle, string>(face, detector.Key) );
+                                    rects.Add( new FaceResult {
+                                        Rect = face,
+                                        Image = Path.GetFileName(path),
+                                        Cascade = detector.Key
+                                    } );
                                 }
                             }
 
@@ -73,9 +83,9 @@ namespace EmguCVSample
                         }
                     }
 
-                    foreach (var face in rects )
+                    foreach (var face in rects.OrderBy( x => x.Image ) )
                     {
-                        Console.WriteLine($" Found face: {face.Key.Left}, {face.Key.Top}, {face.Key.Width}, {face.Key.Height} [{face.Value}]");
+                        Console.WriteLine($"Found face in {face.Image}: {face.Rect.Left}, {face.Rect.Top}, {face.Rect.Width}, {face.Rect.Height} [{face.Cascade}]");
                     }
 
                     Console.WriteLine("Complete - all images processed.");
