@@ -32,7 +32,7 @@ COPY haarcascade_frontalface_default.xml "/emgu/haarcascade_frontalface_default.
 RUN dotnet restore
 
 RUN dotnet publish emgu.csproj -r linux-x64 -f net5.0 -c Release /p:Version=1.0.0 
-RUN ls /emgu/bin/Release/net5.0/linux-x64/
+RUN ls /emgu/bin/Release/net5.0/linux-x64
 
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
