@@ -1,4 +1,5 @@
-FROM ubuntu:20.04 as final
+FROM emgu/bazel-android:dotnet-5.0-bazel-4.0
+#FROM ubuntu:20.04 as final
 
 # Copy the entrypoint script
 COPY ./entrypoint.sh /
