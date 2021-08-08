@@ -47,6 +47,8 @@ WORKDIR /home
 RUN ldconfig
 RUN rm -rf libheif ImageMagick
 
+WORKDIR /
+
 # init the font caches
 RUN fc-cache -f -v
 
