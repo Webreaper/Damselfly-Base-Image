@@ -5,7 +5,7 @@ echo "=== Starting ImageMagick build/install."
 sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 
 apt-get update
-apt-get install -y build-essential curl git
+apt-get install -y build-essential curl git tee
 apt-get build-dep -y imagemagick
 apt-get install -y libde265-dev libopenjp2-7-dev librsvg2-dev libwebp-dev
 
@@ -30,8 +30,9 @@ make install
 cd ..
 
 ./ldconfig
-rm -rf libheif ImageMagick
+rm -rf libheif ImageMagick 
 
-apt-get -y remove build-essential curl git build-dep 
+convert -version | tee imagemagick_version.txt
+# apt-get -y remove build-essential curl git build-dep 
 
 echo "=== Completed ImageMagick build/install."
