@@ -24,6 +24,7 @@ RUN apt-get install -y build-essential curl git
 RUN apt-get build-dep -y imagemagick
 RUN apt-get install -y libde265-dev libopenjp2-7-dev librsvg2-dev libwebp-dev
 
+WORKDIR /home
 RUN git clone https://github.com/strukturag/libheif.git
 WORKDIR /home/libheif
 RUN ./autogen.sh
