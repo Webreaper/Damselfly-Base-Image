@@ -17,37 +17,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
 
 # ImageMagick with HEIC support. From https://github.com/nekonenene/imagemagick_heic_image
 
-RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
-
-RUN apt-get update
-RUN apt-get install -y build-essential curl git
-RUN apt-get build-dep -y imagemagick
-RUN apt-get install -y libde265-dev libopenjp2-7-dev librsvg2-dev libwebp-dev
-
-WORKDIR /home
-RUN git clone https://github.com/strukturag/libheif.git
-WORKDIR /home/libheif
-RUN ./autogen.sh
-RUN ./configure
-RUN make
-RUN make install
-RUN cd ..
-
-WORKDIR /home
-
-RUN mkdir ImageMagick
-RUN curl https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
-RUN rm ImageMagick.tar.gz
-WORKDIR /home/ImageMagick
-RUN ./configure --with-heic=yes
-RUN make
-RUN make install
-RUN cd ..
-
-WORKDIR /home
-
-RUN ldconfig
-RUN rm -rf libheif ImageMagick
+WORKDIR /home 
+COPY ./make_imagemagick.sh .
+RUN make_imagemagick.sh
 
 WORKDIR /
 
