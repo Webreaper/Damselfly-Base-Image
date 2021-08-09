@@ -37,6 +37,7 @@ WORKDIR /home
 
 RUN mkdir ImageMagick
 RUN curl https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
+RUN rm ImageMagick.tar.gz
 WORKDIR /home/ImageMagick
 RUN ./configure --with-heic=yes
 RUN make
