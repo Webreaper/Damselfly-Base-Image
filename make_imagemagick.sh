@@ -29,7 +29,7 @@ make
 make install
 cd ..
 
-./ldconfig
+ldconfig
 rm -rf libheif ImageMagick 
 rm -rf /var/lib/apt/lists/*
 
