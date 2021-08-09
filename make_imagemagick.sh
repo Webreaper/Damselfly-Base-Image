@@ -10,6 +10,7 @@ apt-get build-dep -y imagemagick
 apt-get install -y libde265-dev libopenjp2-7-dev librsvg2-dev libwebp-dev
 
 echo "=== Building libheif..."
+cd /home
 git clone https://github.com/strukturag/libheif.git
 cd /home/libheif
 ./autogen.sh
