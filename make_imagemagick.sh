@@ -34,6 +34,7 @@ rm -rf libheif ImageMagick
 rm -rf /var/lib/apt/lists/*
 
 convert -version | tee imagemagick_version.txt
+which convert
 # apt-get -y remove build-essential curl git build-dep 
 
 echo "=== Completed ImageMagick build/install."
