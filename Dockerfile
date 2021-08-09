@@ -1,8 +1,6 @@
 FROM ubuntu:20.04
 
-RUN apt update
-
-RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install --no-cache -y \
                         # procps 
                         procps \
                         # exiftool
@@ -13,7 +11,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         libgomp1 apt-utils libgdiplus libc6-dev \
                         # Now the emgucv dependencies
                         libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev \
-                        libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev 
+                        libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev \
+                  && rm -rf /var/lib/apt/lists/*
 
 # ImageMagick with HEIC support. From https://github.com/nekonenene/imagemagick_heic_image
 
