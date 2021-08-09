@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
 
 WORKDIR /home 
 COPY ./make_imagemagick.sh /home
-RUN /home/make_imagemagick.sh
+RUN chmod +x ./make_imagemagick.sh && /home/make_imagemagick.sh
 
 WORKDIR /
 
