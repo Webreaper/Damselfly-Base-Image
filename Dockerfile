@@ -9,8 +9,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recomm
                         fontconfig fonts-liberation \
                         # GDI+ and ONNX 
                         libgomp1 apt-utils libgdiplus libc6-dev \
-                        # ufraw-batch - for ImageMagick Sony conversions
-                        ufraw-batch \
+                        # ufraw - for ImageMagick Sony conversions
+                        dcraw nufraw \
                         # Now the emgucv dependencies
                         libgtk-3-dev libgstreamer1.0-dev libavcodec-dev libswscale-dev libavformat-dev libdc1394-22-dev \
                         libv4l-dev cmake-curses-gui ocl-icd-dev freeglut3-dev libgeotiff-dev libusb-1.0-0-dev \
