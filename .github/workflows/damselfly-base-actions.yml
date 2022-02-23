@@ -1,4 +1,4 @@
-name: damselfly-actions
+name: damselfly-base-image
 on: [push]
 jobs:
   build-docker:
