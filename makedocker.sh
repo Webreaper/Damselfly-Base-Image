@@ -18,6 +18,9 @@ docker push webreaper/damselfly-base:$DOCKERTAG
 
 if [ -n "$1" ]
 then
+    echo "*** Pushing docker image to webreaper/damselfly-base:dev"
+    docker tag damselfly-base webreaper/damselfly-base:dev
+    docker push webreaper/damselfly-base:dev
     echo "*** Pushing docker image to webreaper/damselfly-base:latest"
     docker tag damselfly-base webreaper/damselfly-base:latest
     docker push webreaper/damselfly-base:latest
