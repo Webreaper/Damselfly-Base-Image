@@ -21,7 +21,7 @@ make install
 cd /home
 echo "=== Building ImageMagick..."
 mkdir ImageMagick
-curl https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
+curl https://imagemagick.org/archive/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
 rm ImageMagick.tar.gz
 cd /home/ImageMagick
 ./configure --with-heic=yes
