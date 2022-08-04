@@ -4,7 +4,7 @@ if [ -z "$1" ]; then
     DOCKERTAG='dev'
 else
     version=`cat VERSION`
-    DOCKERTAG="${version}-beta"
+    DOCKERTAG="${version}"
     echo "Main specified - creating tag: ${DOCKERTAG}"
 fi
 
