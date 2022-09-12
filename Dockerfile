@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0.0-preview.7-jammy
+FROM mcr.microsoft.com/dotnet/aspnet:7.0.0-preview.7
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         # procps 
