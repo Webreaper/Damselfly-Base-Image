@@ -9,8 +9,7 @@ export EXIFTOOL_VERSION=12.48
 
 cd /home
 mkdir Image-ExifTool-${EXIFTOOL_VERSION}
-curl https://exiftool.org//Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
-tar -zxvf Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
+curl https://exiftool.org/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz | tar zx -C Image-ExifTool-${EXIFTOOL_VERSION} --strip-components 1
 rm Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
 cd /home/Image-ExifTool-${EXIFTOOL_VERSION} 
 perl Makefile.PL 
