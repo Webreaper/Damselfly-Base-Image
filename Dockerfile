@@ -17,11 +17,14 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recomm
 # ImageMagick with HEIC support. From https://github.com/nekonenene/imagemagick_heic_image
 
 WORKDIR /home 
-COPY ./make_imagemagick.sh /home
-RUN chmod +x ./make_imagemagick.sh && /home/make_imagemagick.sh
 
 COPY ./make_exiftool.sh /home
 RUN chmod +x ./make_exiftool.sh && /home/make_exiftool.sh
+
+WORKDIR /home 
+
+COPY ./make_imagemagick.sh /home
+RUN chmod +x ./make_imagemagick.sh && /home/make_imagemagick.sh
 
 WORKDIR /
 
