@@ -3,8 +3,6 @@ FROM ubuntu:20.04
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         # procps 
                         procps \
-                        #perl for exiftool build 
-                        perl make \
                         # and lastly, fonts
                         fontconfig fonts-liberation \
                         # GDI+ and ONNX 

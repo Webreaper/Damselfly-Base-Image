@@ -9,7 +9,7 @@ export EXIFTOOL_VERSION=12.48
 
 cd /home
 mkdir Image-ExifTool-${EXIFTOOL_VERSION}
-curl http://www.sno.phy.queensu.ca/~phil/exiftool/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
+curl https://exiftool.org//Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
 tar -zxvf Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
 rm Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
 cd /home/Image-ExifTool-${EXIFTOOL_VERSION} 
