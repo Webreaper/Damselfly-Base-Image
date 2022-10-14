@@ -3,8 +3,6 @@ FROM ubuntu:20.04
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         # procps 
                         procps \
-                        # exiftool
-                        exiftool \
                         # and lastly, fonts
                         fontconfig fonts-liberation \
                         # GDI+ and ONNX 
@@ -21,6 +19,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recomm
 WORKDIR /home 
 COPY ./make_imagemagick.sh /home
 RUN chmod +x ./make_imagemagick.sh && /home/make_imagemagick.sh
+
+COPY ./make_exiftool.sh /home
+RUN chmod +x ./make_exiftool.sh && /home/make_exiftool.sh
 
 WORKDIR /
 
