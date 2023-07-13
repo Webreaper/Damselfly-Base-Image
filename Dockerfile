@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:23.10
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         # procps 

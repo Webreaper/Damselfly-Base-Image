@@ -5,7 +5,7 @@ echo "=== Starting ExifTool build/install."
 apt-get update
 apt-get install -y build-essential curl git perl make
 
-export EXIFTOOL_VERSION=12.48
+export EXIFTOOL_VERSION=12.64
 
 cd /home
 mkdir Image-ExifTool-${EXIFTOOL_VERSION}
