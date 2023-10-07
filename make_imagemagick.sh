@@ -13,10 +13,10 @@ echo "=== Building libheif..."
 cd /home
 git clone https://github.com/strukturag/libheif.git
 cd /home/libheif
-./autogen.sh
-./configure
+mkdir build
+cd build
+cmake --preset=release ..
 make
-make install
 
 cd /home
 echo "=== Building ImageMagick..."
