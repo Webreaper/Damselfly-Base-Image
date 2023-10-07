@@ -13,15 +13,15 @@ echo "=== Building libheif..."
 cd /home
 git clone https://github.com/strukturag/libheif.git
 cd /home/libheif
-./autogen.sh
-./configure
-make
+mkdir build
+cd build
+cmake --preset=release ..
 make install
 
 cd /home
 echo "=== Building ImageMagick..."
 mkdir ImageMagick
-curl https://imagemagick.org/archive/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
+curl https://download.imagemagick.org/archive/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
 rm ImageMagick.tar.gz
 cd /home/ImageMagick
 ./configure --with-heic=yes
