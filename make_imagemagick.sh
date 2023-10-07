@@ -15,7 +15,7 @@ git clone https://github.com/strukturag/libheif.git
 cd /home/libheif
 mkdir build
 cd build
-cmake --preset=release 
+cmake --preset=release ..
 
 cd /home
 echo "=== Building ImageMagick..."
