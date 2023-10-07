@@ -16,6 +16,7 @@ cd /home/libheif
 mkdir build
 cd build
 cmake --preset=release ..
+make install
 
 cd /home
 echo "=== Building ImageMagick..."
