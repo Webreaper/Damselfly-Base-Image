@@ -20,7 +20,7 @@ cmake --preset=release ..
 cd /home
 echo "=== Building ImageMagick..."
 mkdir ImageMagick
-curl https://download.imagemagick.org/ImageMagick/download/ImageMagick.tar.gz | tar xf -C ImageMagick --strip-components 1
+curl https://download.imagemagick.org/archive/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
 rm ImageMagick.tar.gz
 cd /home/ImageMagick
 ./configure --with-heic=yes
