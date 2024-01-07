@@ -26,6 +26,11 @@ WORKDIR /home
 COPY ./make_exiftool.sh /home
 RUN chmod +x ./make_exiftool.sh && /home/make_exiftool.sh
 
+WORKDIR /home 
+
+COPY ./cleanup.sh /home
+RUN chmod +x ./cleanup.sh && /home/cleanup.sh
+
 WORKDIR /
 
 # init the font caches
@@ -33,9 +38,6 @@ RUN fc-cache -f -v
 
 # Need sudo for the iNotify count increase
 # RUN set -ex && apt-get install -y sudo
-
-# Clean up
-RUN apt-get remove build-essential git curl make perl
 
 # Copy the entrypoint script
 COPY ./entrypoint.sh /
