@@ -34,6 +34,9 @@ RUN fc-cache -f -v
 # Need sudo for the iNotify count increase
 # RUN set -ex && apt-get install -y sudo
 
+# Clean up
+RUN apt-get remove build-essential git curl make perl
+
 # Copy the entrypoint script
 COPY ./entrypoint.sh /
 RUN ["chmod", "+x", "/entrypoint.sh"]
