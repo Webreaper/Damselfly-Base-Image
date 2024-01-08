@@ -18,20 +18,20 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recomm
 
 WORKDIR /home 
 
-COPY ./make_imagemagick.sh /home
-RUN chmod +x ./make_imagemagick.sh && /home/make_imagemagick.sh
+COPY [ \
+  "make_imagemagick.sh", \
+  "make_exiftool.sh", \
+  "cleanup.sh", \
+  "/home/" \
+]
 
-WORKDIR /home 
-
-COPY ./make_exiftool.sh /home
-RUN chmod +x ./make_exiftool.sh && /home/make_exiftool.sh
-
-WORKDIR /home 
-
-COPY ./cleanup.sh /home
-RUN chmod +x ./cleanup.sh && /home/cleanup.sh
-
-WORKDIR /
+RUN set -eux \
+    && chmod +x ./make_imagemagick.sh \
+    && chmod +x ./make_exiftool.sh \
+    && chmod +x ./cleanup.sh \
+    && /home/make_imagemagick.sh \
+    && /home/make_exiftool.sh \
+    && /home/cleanup.sh
 
 # init the font caches
 RUN fc-cache -f -v
