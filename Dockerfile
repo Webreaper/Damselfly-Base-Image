@@ -21,7 +21,7 @@ WORKDIR /home
 COPY [ \
   "make_imagemagick.sh", \
   "make_exiftool.sh", \
-  # "cleanup.sh", \
+  "cleanup.sh", \
   "/home/" \
 ]
 
