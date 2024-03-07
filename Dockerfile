@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
+RUN  DEBIAN_FRONTEND=noninteractive apt-get update \
+                        && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends install -y \
                         # procps 
                         procps \
                         # and lastly, fonts
@@ -9,7 +10,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recomm
                         libgomp1 apt-utils libgdiplus libc6-dev \
                         # ufraw - for ImageMagick Sony conversions
                         dcraw \
-                  && rm -rf /var/lib/apt/lists/*
+                        && rm -rf /var/lib/apt/lists/*
                   
 # ImageMagick with HEIC support. From https://github.com/nekonenene/imagemagick_heic_image
 
