@@ -4,6 +4,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
       && apt-get --no-install-recommends install -y \
+      # libraw for imagemagick
+      libraw-bin \
       # procps 
       procps \
       # and lastly, fonts
