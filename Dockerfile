@@ -31,6 +31,7 @@ RUN set -eux \
     && chmod +x ./make_imagemagick.sh \
     && chmod +x ./make_exiftool.sh \
     && chmod +x ./cleanup.sh \
+    && chmod +x ./validate.sh \
     && /home/make_imagemagick.sh \
     && /home/make_exiftool.sh \
     && /home/cleanup.sh \
