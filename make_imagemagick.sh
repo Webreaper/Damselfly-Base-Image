@@ -5,7 +5,7 @@ echo "=== Starting ImageMagick build/install."
 sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 
 apt-get update
-apt-get install -y build-essential curl git 
+apt-get install -y build-essential curl git libraw-dev libtool
 apt-get build-dep -y imagemagick
 apt-get install -y libde265-dev libopenjp2-7-dev librsvg2-dev libwebp-dev
 
@@ -24,7 +24,7 @@ mkdir ImageMagick
 curl https://download.imagemagick.org/archive/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1
 rm ImageMagick.tar.gz
 cd /home/ImageMagick
-./configure --with-heic=yes
+./configure --with-heic=yes --with-raw 
 make
 make install
 cd ..
