@@ -25,7 +25,7 @@ curl https://download.imagemagick.org/archive/ImageMagick.tar.gz | tar zx -C Ima
 rm ImageMagick.tar.gz
 cd /home/ImageMagick
 ./configure --with-heic=yes --with-raw=yes
-make
+make -j 4
 make install
 cd ..
 
