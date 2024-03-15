@@ -18,6 +18,16 @@ cd build
 cmake --preset=release ..
 make install
 
+echo "=== Building libraw..."
+cd /home
+mkdir libraw
+curl https://www.libraw.org/data/LibRaw-0.21.2.tar.gz | tar zx -C libraw --strip-components 1
+cd /home/libraw
+./configure
+make -j 4
+make install
+cd ..
+
 cd /home
 echo "=== Building ImageMagick..."
 mkdir ImageMagick
@@ -30,7 +40,7 @@ make install
 cd ..
 
 ldconfig
-rm -rf libheif ImageMagick 
+rm -rf libheif ImageMagick libraw
 rm -rf /var/lib/apt/lists/*
 
 convert -version | tee imagemagick_version.txt
