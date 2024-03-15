@@ -13,8 +13,8 @@ curl https://exiftool.org/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz | tar zx -C 
 rm Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz 
 cd /home/Image-ExifTool-${EXIFTOOL_VERSION} 
 perl Makefile.PL 
-make test 
-make install 
+make test -j 4
+make install -j 4
 cd .. 
 rm -rf Image-ExifTool-${EXIFTOOL_VERSION}
 
