@@ -5,7 +5,7 @@ echo "=== Starting ImageMagick build/install."
 sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 
 apt-get update
-apt-get install -y build-essential curl git libtool
+apt-get install -y build-essential curl git libtool cmake
 apt-get build-dep -y imagemagick
 apt-get install -y libde265-dev libopenjp2-7-dev librsvg2-dev libwebp-dev libraw-dev
 
