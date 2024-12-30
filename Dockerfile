@@ -24,7 +24,7 @@ WORKDIR /home
 
 # Build libheif
 ENV LIBHEIF_VERSION=1.19.5
-RUN cd /home && mkdir libheif && curl https://github.com/strukturag/libheif/releases/download/v${LIBHEIF_VERSION}/libheif-${LIBHEIF_VERSION}.tar.gz | tar zx -C libheif --strip-components 1 \
+RUN cd /home && mkdir libheif && curl https://github.com/strukturag/libheif/releases/download/v${LIBHEIF_VERSION}/libheif-${LIBHEIF_VERSION}.tar.gz | tar xf -C libheif --strip-components 1 \
     && cd libheif \
     && mkdir build \
     && cd build \
