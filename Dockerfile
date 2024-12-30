@@ -8,6 +8,7 @@ RUN sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.s
     apt-get update && apt-get install -y \
     build-essential \
     curl \
+    git \
     libtool \
     cmake \
     perl \
