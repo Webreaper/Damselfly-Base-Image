@@ -23,13 +23,14 @@ RUN sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.s
 WORKDIR /home
 
 # Build libheif
-# ENV LIBHEIF_VERSION=1.19.5
-# RUN cd /home && mkdir libheif && curl https://github.com/strukturag/libheif/archive/refs/tags/v${LIBHEIF_VERSION}.tar.gz | tar zx -C libheif --strip-components 1 \
-#     && cd libheif \
-#     && mkdir build \
-#     && cd build \
-#     && cmake --preset=release .. \
-#     && make install
+ENV LIBHEIF_VERSION=1.19.5
+RUN cd /home && git clone https://github.com/strukturag/libheif.git \
+    && cd libheif \
+    && git switch tags/v{LIBHEIF_VERSION} --detach \
+    && mkdir build \
+    && cd build \
+    && cmake --preset=release .. \
+    && make install
 
 # Build libraw
 ENV LIBRAW_VERSION=0.21.3
