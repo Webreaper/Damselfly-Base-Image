@@ -27,7 +27,7 @@ WORKDIR /home
 ENV LIBHEIF_VERSION=1.19.5
 RUN cd /home && git clone https://github.com/strukturag/libheif.git \
     && cd libheif \
-    && git switch tags/v{LIBHEIF_VERSION} --detach \
+    && git switch tags/v${LIBHEIF_VERSION} --detach \
     && mkdir build \
     && cd build \
     && cmake --preset=release .. \
