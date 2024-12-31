@@ -8,7 +8,6 @@ RUN sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.s
     apt-get update && apt-get install -y \
     build-essential \
     curl \
-    git \
     libtool \
     cmake \
     perl \
@@ -25,9 +24,8 @@ WORKDIR /home
 
 # Build libheif
 ENV LIBHEIF_VERSION=1.19.5
-RUN cd /home && git clone https://github.com/strukturag/libheif.git \
+RUN cd /home && mkdir libheif && curl -L https://github.com/strukturag/libheif/releases/download/v${LIBHEIF_VERSION}/libheif-${LIBHEIF_VERSION}.tar.gz | tar zx -C libheif --strip-components 1 \
     && cd libheif \
-    && git switch tags/v${LIBHEIF_VERSION} --detach \
     && mkdir build \
     && cd build \
     && cmake --preset=release .. \
