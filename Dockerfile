@@ -22,7 +22,17 @@ RUN sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.s
 
 WORKDIR /home
 
-# Build libheif
+# Build ExifTool
+ENV EXIFTOOL_VERSION=13.59
+RUN cd /home && mkdir Image-ExifTool \
+    && curl https://sourceforge.net/projects/exiftool/files/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz/download | tar zx -C Image-ExifTool --strip-components 1 \
+    && cd Image-ExifTool \
+    && perl Makefile.PL \
+    && make test -j 4 \
+    && make install -j 4 \
+    && ldconfig && exiftool -ver
+
+    # Build libheif
 ENV LIBHEIF_VERSION=1.23.0
 RUN cd /home && mkdir libheif && curl -L https://github.com/strukturag/libheif/releases/download/v${LIBHEIF_VERSION}/libheif-${LIBHEIF_VERSION}.tar.gz | tar zx -C libheif --strip-components 1 \
     && cd libheif \
@@ -49,16 +59,6 @@ RUN cd /home && mkdir ImageMagick \
     && make -j 4 \
     && make install \
     && ldconfig && convert -version
-
-# Build ExifTool
-ENV EXIFTOOL_VERSION=13.59
-RUN cd /home && mkdir Image-ExifTool \
-    && curl https://exiftool.org/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz | tar zx -C Image-ExifTool --strip-components 1 \
-    && cd Image-ExifTool \
-    && perl Makefile.PL \
-    && make test -j 4 \
-    && make install -j 4 \
-    && ldconfig && exiftool -ver
 
 # Runtime stage
 FROM ubuntu:latest
