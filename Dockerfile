@@ -23,7 +23,7 @@ RUN sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.s
 WORKDIR /home
 
 # Build libheif
-ENV LIBHEIF_VERSION=1.19.5
+ENV LIBHEIF_VERSION=1.23.0
 RUN cd /home && mkdir libheif && curl -L https://github.com/strukturag/libheif/releases/download/v${LIBHEIF_VERSION}/libheif-${LIBHEIF_VERSION}.tar.gz | tar zx -C libheif --strip-components 1 \
     && cd libheif \
     && mkdir build \
@@ -32,7 +32,7 @@ RUN cd /home && mkdir libheif && curl -L https://github.com/strukturag/libheif/r
     && make install
 
 # Build libraw
-ENV LIBRAW_VERSION=0.21.3
+ENV LIBRAW_VERSION=0.22.1
 RUN cd /home && mkdir libraw \
     && curl https://www.libraw.org/data/LibRaw-${LIBRAW_VERSION}.tar.gz | tar zx -C libraw --strip-components 1 \
     && cd libraw \
@@ -41,7 +41,7 @@ RUN cd /home && mkdir libraw \
     && make install
 
 # Build ImageMagick
-ENV IMAGEMAGICK_VERSION=7.1.1-43
+ENV IMAGEMAGICK_VERSION=7.1.2-26
 RUN cd /home && mkdir ImageMagick \
     && curl https://imagemagick.org/archive/ImageMagick-${IMAGEMAGICK_VERSION}.tar.gz | tar zx -C ImageMagick --strip-components 1 \
     && cd ImageMagick \
@@ -51,7 +51,7 @@ RUN cd /home && mkdir ImageMagick \
     && ldconfig && convert -version
 
 # Build ExifTool
-ENV EXIFTOOL_VERSION=13.10
+ENV EXIFTOOL_VERSION=13.59
 RUN cd /home && mkdir Image-ExifTool \
     && curl https://exiftool.org/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz | tar zx -C Image-ExifTool --strip-components 1 \
     && cd Image-ExifTool \
@@ -61,7 +61,7 @@ RUN cd /home && mkdir Image-ExifTool \
     && ldconfig && exiftool -ver
 
 # Runtime stage
-FROM ubuntu:24.04
+FROM ubuntu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
 
