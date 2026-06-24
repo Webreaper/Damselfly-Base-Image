@@ -1,7 +1,7 @@
 name: damselfly-base-image
 on: [push]
 jobs:
-build-desktop:
+  build-desktop:
     runs-on: ${{ matrix.os }}
     strategy: 
       matrix: 
