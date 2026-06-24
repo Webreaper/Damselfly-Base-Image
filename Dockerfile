@@ -25,7 +25,7 @@ WORKDIR /home
 # Build ExifTool
 ENV EXIFTOOL_VERSION=13.59
 RUN cd /home && mkdir Image-ExifTool \
-    && curl https://sourceforge.net/projects/exiftool/files/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz/download | tar zx -C Image-ExifTool --strip-components 1 \
+    && curl -L https://sourceforge.net/projects/exiftool/files/Image-ExifTool-${EXIFTOOL_VERSION}.tar.gz/download | tar xz -C Image-ExifTool --strip-components 1  \
     && cd Image-ExifTool \
     && perl Makefile.PL \
     && make test -j 4 \
