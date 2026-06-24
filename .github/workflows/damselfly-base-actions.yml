@@ -1,6 +1,48 @@
 name: damselfly-base-image
 on: [push]
 jobs:
+build-desktop:
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix: 
+        target: [universal, linux, windows]
+        include: 
+          - target: windows
+            os: windows-latest
+            upload: windows
+          - target: linux
+            os: ubuntu-latest
+            upload: linux
+          - target: universal
+            os: macos-latest
+            upload: mac
+
+    steps:
+      - name: Clone Repository (latest)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref == ''
+
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref != ''
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - name: Run Electron build
+        run: sh scripts/makedesktop.sh ${{ matrix.target }}
+
+      - name: Upload desktop builds for Docker build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Desktop-Dist-${{ matrix.upload }}
+          path: desktop-build/*.*
+          retention-days: 5
+
   build-docker:
     runs-on: ${{ matrix.os }}
     strategy: 
