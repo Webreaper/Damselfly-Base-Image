@@ -88,7 +88,7 @@ COPY --from=builder /usr/local/share /usr/local/share
 COPY --from=builder /usr/local/include /usr/local/include
 
 # Copy the built electron containers
-COPY /desktop-bin ./desktop
+COPY /desktop-bin ./wwwroot/desktop
 
 # Update library cache
 RUN ldconfig && convert -version | tee /home/imagemagick_version.txt
