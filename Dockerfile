@@ -1,5 +1,5 @@
 # Build stage
-FROM ubuntu:24.04 AS builder
+FROM ubuntu:latest AS builder
 
 ARG DEBIAN_FRONTEND=noninteractive
 
