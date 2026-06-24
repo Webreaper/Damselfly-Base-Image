@@ -27,7 +27,7 @@ case $PLATFORM in
     ;;
 esac
 
-destfolder="${PWD}/Damselfly.Web.Client/wwwroot/desktop"
+destfolder="${PWD}/desktop-build"
 
 cd Damselfly.Desktop
 
