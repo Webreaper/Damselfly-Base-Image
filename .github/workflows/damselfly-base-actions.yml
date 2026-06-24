@@ -1,7 +1,50 @@
 name: damselfly-base-image
 on: [push]
 jobs:
+  build-desktop:
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix: 
+        target: [universal, linux, windows]
+        include: 
+          - target: windows
+            os: windows-latest
+            upload: windows
+          - target: linux
+            os: ubuntu-latest
+            upload: linux
+          - target: universal
+            os: macos-latest
+            upload: mac
+
+    steps:
+      - name: Clone Repository (latest)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref == ''
+
+      - name: Clone Repository (Custom Ref)
+        uses: actions/checkout@v3
+        if: github.event.inputs.git-ref != ''
+        with:
+          ref: ${{ github.event.inputs.git-ref }}
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - name: Run Electron build
+        run: sh makedesktop.sh ${{ matrix.target }}
+
+      - name: Upload desktop builds for Docker build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Desktop-Dist-${{ matrix.upload }}
+          path: desktop-build/*.*
+          retention-days: 5
+
   build-docker:
+    needs: [build-desktop]
     runs-on: ${{ matrix.os }}
     strategy: 
       matrix: 
@@ -30,6 +73,24 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
+      - name: Download Mac Desktop Builds into wwwroot folder
+        uses: actions/download-artifact@v4
+        with:
+          name: Desktop-Dist-mac
+          path: desktop-bin
+
+      - name: Download Windows Desktop Builds into wwwroot folder
+        uses: actions/download-artifact@v4
+        with:
+          name: Desktop-Dist-windows
+          path: desktop-bin
+      
+      - name: Download Linux Desktop Builds into wwwroot folder
+        uses: actions/download-artifact@v4
+        with:
+          name: Desktop-Dist-linux
+          path: desktop-bin
+
       - name: Build Docker for Dev (develop only)
         if: github.ref == 'refs/heads/develop'
         run: sh makedocker.sh
