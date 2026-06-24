@@ -40,10 +40,10 @@ RUN cd /home && mkdir libraw \
     && make -j 4 \
     && make install
 
-# Build ImageMagick
-ENV IMAGEMAGICK_VERSION=7.1.2-26
+# Build ImageMagick - ignore the version and get latest
+ENV IMAGEMAGICK_VERSION=7.1.2-25 
 RUN cd /home && mkdir ImageMagick \
-    && curl https://imagemagick.org/archive/ImageMagick-${IMAGEMAGICK_VERSION}.tar.gz | tar zx -C ImageMagick --strip-components 1 \
+    && curl https://imagemagick.org/archive/ImageMagick.tar.gz | tar zx -C ImageMagick --strip-components 1 \
     && cd ImageMagick \
     && ./configure --with-heic=yes --with-raw=yes \
     && make -j 4 \
