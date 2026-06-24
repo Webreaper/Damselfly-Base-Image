@@ -34,7 +34,7 @@ jobs:
           node-version: 16
       
       - name: Run Electron build
-        run: sh scripts/makedesktop.sh ${{ matrix.target }}
+        run: sh makedesktop.sh ${{ matrix.target }}
 
       - name: Upload desktop builds for Docker build
         uses: actions/upload-artifact@v4
